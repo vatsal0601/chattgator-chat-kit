@@ -1,1 +1,2 @@
-export { default as Button } from "./Button";
+export { default as Print } from "./Print";
+export * from "./Misc";
