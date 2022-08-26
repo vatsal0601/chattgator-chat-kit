@@ -1,7 +1,6 @@
+import React, { useEffect, createContext, useContext, useState } from "react";
 import { ProfileService, ChatService } from "../../utils";
-import { useEffect, createContext, useContext, useState, Dispatch, SetStateAction } from "react";
 import { io, Socket } from "socket.io-client";
-import React, { FC, ReactNode } from "react";
 
 const socket: Socket = io("https://chatgator-backend.herokuapp.com");
 
@@ -42,15 +41,20 @@ interface ChattGatorContextProps {
 	projectConfig: ProjectConfig;
 	user: UserResponse | null;
 	chatId: string;
-	setChatId: Dispatch<SetStateAction<string>>;
+	setChatId: React.Dispatch<React.SetStateAction<string>>;
 	profileDetails: ProfileType | null;
-	setProfileDetails: Dispatch<SetStateAction<ProfileType | null>>;
+	setProfileDetails: React.Dispatch<React.SetStateAction<ProfileType | null>>;
 	activeChat: any;
-	setActiveChat: Dispatch<SetStateAction<any>>;
+	setActiveChat: React.Dispatch<React.SetStateAction<any>>;
 	chatMessages: Message[];
-	setChatMessages: Dispatch<SetStateAction<Message[]>>;
+	setChatMessages: React.Dispatch<React.SetStateAction<Message[]>>;
 	isLoading: boolean;
 	isMessagesLoading: boolean;
+	projectUsers: UserResponse[];
+	selectedPeople: UserResponse;
+	setSelectedPeople: React.Dispatch<React.SetStateAction<UserResponse>>;
+	selectedGroup: UserResponse[];
+	setSelectedGroup: React.Dispatch<React.SetStateAction<UserResponse[]>>;
 }
 
 interface InitialValue {
@@ -60,7 +64,7 @@ interface InitialValue {
 
 interface ChattGatorProviderProps {
 	value: InitialValue;
-	children: ReactNode;
+	children: React.ReactNode;
 }
 
 interface ProfileType {
@@ -76,21 +80,34 @@ interface MessageResponse {
 
 const ChattGatorContext = createContext<ChattGatorContextProps | undefined>(undefined);
 
-export const ChattGatorProvider: FC<ChattGatorProviderProps> = ({ value, children }) => {
+export const ChattGatorProvider: React.FC<ChattGatorProviderProps> = ({ value, children }) => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [isMessagesLoading, setIsMessagesLoading] = useState<boolean>(true);
+	const [projectUsers, setProjectUsers] = useState<UserResponse[]>([]);
 	const [user, setUser] = useState<UserResponse | null>(null);
 	const [activeChat, setActiveChat] = useState<any>(null);
 	const [chatId, setChatId] = useState<string>("");
 	const [profileDetails, setProfileDetails] = useState<ProfileType | null>(null);
 	const [chatMessages, setChatMessages] = useState<Message[]>([]);
+	const [selectedPeople, setSelectedPeople] = useState<UserResponse>(projectUsers[0]);
+	const [selectedGroup, setSelectedGroup] = useState<UserResponse[]>([projectUsers[0]]);
 
 	useEffect(() => {
 		const getData = async () => {
 			const userResponseService = new ProfileService();
 			try {
+				const allUsers = await userResponseService.getAllUsers(value.projectConfig.projectId);
+				console.log({ allUsers, chatMessages });
+				setProjectUsers(allUsers);
+				setSelectedPeople(allUsers[0]);
+				setSelectedGroup([allUsers[0]]);
 				const data = await userResponseService.getUserByUserId(value.user.userId);
-				setUser(data[0]);
+				if (data.length === 0) {
+					const user = await userResponseService.createUser(value.user);
+					setUser(user);
+				} else {
+					setUser(data[0]);
+				}
 				socket.on("connect", () => console.log(`Client connected: ${socket.id}`));
 				socket.on("message", ({ user, message }: MessageResponse) => {
 					console.log({ user, message });
@@ -106,7 +123,7 @@ export const ChattGatorProvider: FC<ChattGatorProviderProps> = ({ value, childre
 			}
 		};
 		getData();
-	}, [value.user.userId]);
+	}, []);
 
 	useEffect(() => {
 		const getData = async () => {
@@ -140,6 +157,11 @@ export const ChattGatorProvider: FC<ChattGatorProviderProps> = ({ value, childre
 				chatMessages,
 				setChatMessages,
 				isMessagesLoading,
+				projectUsers,
+				selectedPeople,
+				setSelectedPeople,
+				selectedGroup,
+				setSelectedGroup,
 			}}
 		>
 			{children}

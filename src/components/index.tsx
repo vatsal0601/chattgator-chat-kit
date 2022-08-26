@@ -1,2 +1,2 @@
-export { default as Print } from "./Print";
 export * from "./Misc";
+export * from "./RecentChatContainer";

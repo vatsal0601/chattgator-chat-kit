@@ -1,3 +1,3 @@
-export { default as RecentChatsService } from "./RecentChats";
-export { default as ProfileService } from "./Profile";
-export { default as ChatService } from "./Chats";
+export { default as RecentChatService } from "./RecentChatService";
+export { default as ChatService } from "./ChatService";
+export { default as ProfileService } from "./ProfileService";

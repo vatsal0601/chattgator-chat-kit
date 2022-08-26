@@ -1,10 +1,10 @@
-import React from "react";
+import type { FC } from "react";
 
 interface Props {
 	className: string;
 }
 
-const Loading: React.FC<Props> = ({ className }) => {
+const Loading: FC<Props> = ({ className }) => {
 	return (
 		<svg
 			className={`animate-spin ${className}`}
