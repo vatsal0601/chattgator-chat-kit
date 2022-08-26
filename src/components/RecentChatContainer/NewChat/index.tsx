@@ -22,18 +22,17 @@ const AddChat: React.FC<Props> = ({ visible, setVisible }) => {
 		if (selectedChat.name === chatOptions[1].name && groupName === "") return;
 
 		const createGroup = async () => {
-			let data;
 			const recentChatService = new RecentChatService();
 			switch (selectedChat.name) {
 				case "New DM":
-					data = await recentChatService.createOneToOneChat({
+					await recentChatService.createOneToOneChat({
 						projectId: projectConfig.projectId,
 						membersList: [user?._id ?? "id", selectedPeople._id],
 					});
 					window.location.reload();
 					break;
 				case "New Group":
-					data = await recentChatService.createGroup({
+					await recentChatService.createGroup({
 						projectId: projectConfig.projectId,
 						name: groupName,
 						description: "This group was created by developer's chat application",

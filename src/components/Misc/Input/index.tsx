@@ -1,12 +1,11 @@
-import { EmojiHappyIcon, PaperClipIcon } from "@heroicons/react/outline";
-import { PlayIcon } from "@heroicons/react/solid";
-import React, { FC, useState } from "react";
+import { PlayIcon } from "@heroicons/react/24/solid";
+import React, { useState } from "react";
 
 interface Props {
 	sendMessage: (message: string) => void;
 }
 
-const Input: FC<Props> = ({ sendMessage }) => {
+const Input: React.FC<Props> = ({ sendMessage }) => {
 	const [message, setMessage] = useState<string>("");
 
 	return (

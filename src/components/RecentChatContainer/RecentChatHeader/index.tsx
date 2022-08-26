@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PlusIcon } from "@heroicons/react/outline";
+import { PlusIcon } from "@heroicons/react/24/outline";
 import { useChattGator } from "../../../contexts";
 import Image from "../../Misc/Image";
 import NewChat from "../NewChat";
@@ -10,7 +10,7 @@ interface Props {
 
 const RecentChatHeader: React.FC<Props> = ({ className = "" }) => {
 	const [visible, setVisible] = useState(false);
-	const { user, setProfileDetails, isLoading } = useChattGator();
+	const { user, setProfileDetails } = useChattGator();
 
 	return (
 		<>

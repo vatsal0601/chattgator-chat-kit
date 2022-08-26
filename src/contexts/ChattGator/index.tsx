@@ -20,6 +20,7 @@ interface Message {
 	groupId: string;
 	messageType: "Text" | "Image" | "Video" | "File";
 	message: string;
+	createdAt: Date;
 }
 
 interface ProjectConfig {
@@ -76,6 +77,7 @@ interface MessageResponse {
 	user: UserResponse;
 	success: boolean;
 	message: string;
+	createdAt: Date;
 }
 
 const ChattGatorContext = createContext<ChattGatorContextProps | undefined>(undefined);
@@ -109,12 +111,13 @@ export const ChattGatorProvider: React.FC<ChattGatorProviderProps> = ({ value, c
 					setUser(data[0]);
 				}
 				socket.on("connect", () => console.log(`Client connected: ${socket.id}`));
-				socket.on("message", ({ user, message }: MessageResponse) => {
-					console.log({ user, message });
-					setChatMessages((chatMessages) => [
-						...chatMessages,
-						{ userId: user, groupId: chatId, messageType: "Text", message },
-					]);
+				socket.on("message", ({ user, message, success, createdAt }: MessageResponse) => {
+					if (success) {
+						setChatMessages((chatMessages) => [
+							...chatMessages,
+							{ userId: user, groupId: chatId, messageType: "Text", message, createdAt },
+						]);
+					}
 				});
 				socket.on("disconnect", (reason) => console.log(`Client disconnected: ${reason}`));
 				setIsLoading(false);

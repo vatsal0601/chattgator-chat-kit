@@ -16,6 +16,7 @@ interface Message {
 	groupId: string;
 	messageType: "Text" | "Image" | "Video" | "File";
 	message: string;
+	createdAt: Date;
 }
 
 interface MessageResponse {

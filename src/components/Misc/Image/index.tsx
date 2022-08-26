@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 
 interface Props {
 	src: string;
@@ -6,7 +6,7 @@ interface Props {
 	className?: string;
 }
 
-const Image: FC<Props> = ({ src, alt, className = "" }) => {
+const Image: React.FC<Props> = ({ src, alt, className = "" }) => {
 	return (
 		<img
 			src={src}

@@ -1,10 +1,10 @@
-import type { FC } from "react";
+import React from "react";
 
 interface Props {
 	className: string;
 }
 
-const Loading: FC<Props> = ({ className }) => {
+const Loading: React.FC<Props> = ({ className }) => {
 	return (
 		<svg
 			className={className}

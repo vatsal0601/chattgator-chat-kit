@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 
 import { Combobox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/solid";
 
 interface UserResponse {
 	projectId: string;
@@ -45,7 +45,7 @@ const ComboBox: React.FC<Props> = ({ selected, setSelected, peopleOptions, class
 							onChange={(event) => setQuery(event.target.value)}
 						/>
 						<Combobox.Button className="absolute focus:outline-none inset-y-0 right-0 flex items-center pr-2">
-							<SelectorIcon
+							<ChevronUpDownIcon
 								className="h-5 w-5 text-gray-400"
 								aria-hidden="true"
 							/>
