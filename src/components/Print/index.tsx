@@ -7,7 +7,7 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ className }) => {
-	const { user, isLoading, projectConfig, socket } = useChattGator();
+	const { user, isLoading, projectConfig } = useChattGator();
 
 	if (isLoading)
 		return (
@@ -21,7 +21,6 @@ const Button: React.FC<ButtonProps> = ({ className }) => {
 		<div className={`space-y-4 ${className}`}>
 			<pre className="block bg-slate-900 text-white p-4">{JSON.stringify(projectConfig, null, 2)}</pre>
 			<pre className="block bg-slate-900 text-white p-4">{JSON.stringify(user, null, 2)}</pre>
-			<pre className="block bg-slate-900 text-white p-4">{JSON.stringify(socket, null, 2)}</pre>
 		</div>
 	);
 };

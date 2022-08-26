@@ -109,8 +109,6 @@ export const ChattGatorProvider: FC<ChattGatorProviderProps> = ({ value, childre
 	}, [value.user.userId]);
 
 	useEffect(() => {
-		socket.emit("joinRoom", { user, groupId: chatId });
-
 		const getData = async () => {
 			const chatService = new ChatService();
 			const messagesData = await chatService.getMessageByGroup(chatId);
@@ -120,7 +118,10 @@ export const ChattGatorProvider: FC<ChattGatorProviderProps> = ({ value, childre
 
 		setIsMessagesLoading(true);
 		setChatMessages([]);
-		if (chatId !== "") getData();
+		if (chatId !== "") {
+			socket.emit("joinRoom", { user, groupId: chatId });
+			getData();
+		}
 	}, [chatId]);
 
 	return (
