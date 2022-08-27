@@ -4,7 +4,7 @@
 		"type": "git",
 		"url": "https://github.com/vatsal0601/chattgator-chat-kit.git"
 	},
-	"version": "0.0.11",
+	"version": "0.0.12",
 	"description": "A chat ui component library with integrated backend by team ChattGator",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
