@@ -37,7 +37,9 @@ const AddChat: React.FC<Props> = ({ visible, setVisible }) => {
 						name: groupName,
 						description: "This group was created by developer's chat application",
 						admins: [user?._id ?? "id"],
-						membersList: [user?._id ?? "id", selectedPeople._id],
+						membersList: Array.from(
+							new Set([user?._id ?? "id", ...selectedGroup.map((people) => people._id)])
+						),
 					});
 					window.location.reload();
 					break;

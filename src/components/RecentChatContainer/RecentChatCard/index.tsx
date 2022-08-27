@@ -56,7 +56,7 @@ const RecentChatCard: React.FC<Props> = ({ _id, id, setId, name, isGroup, member
 				if (isGroup) {
 					setActiveChat({ _id, name, isGroup });
 				} else {
-					setActiveChat({ _id, name, isGroup, avatar: user?.avatar });
+					setActiveChat({ _id: user?._id, name: user?.name, isGroup: false, avatar: user?.avatar });
 				}
 			}}
 			className={`flex w-full items-center space-x-2 lg:space-x-4 p-2 lg:p-4 rounded-xl hover:bg-blue-100  ${

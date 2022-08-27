@@ -20,7 +20,7 @@ interface Props {
 	setSelected: React.Dispatch<React.SetStateAction<UserResponse[]>>;
 }
 
-const GroupComboBox: React.FC<Props> = ({ selected, setSelected, peopleOptions, className = {} }) => {
+const GroupComboBox: React.FC<Props> = ({ selected, setSelected, peopleOptions, className = "" }) => {
 	const [query, setQuery] = useState("");
 
 	const filteredPeople =
