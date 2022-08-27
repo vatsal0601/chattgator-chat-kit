@@ -81,7 +81,7 @@ const AddChat: React.FC<Props> = ({ visible, setVisible }) => {
 									chatOptions={chatOptions}
 								/>
 							</div>
-							{projectUsers.length > 0 && selectedChat.name === chatOptions[1].name && (
+							{projectUsers?.length > 0 && selectedChat.name === chatOptions[1].name && (
 								<div className="grow">
 									<p className="text-xs lg:text-sm font-semibold mb-1 text-blue-600">Group Name</p>
 									<input
@@ -93,7 +93,7 @@ const AddChat: React.FC<Props> = ({ visible, setVisible }) => {
 									/>
 								</div>
 							)}
-							{projectUsers.length > 0 && selectedChat.name === chatOptions[0].name && (
+							{projectUsers?.length > 0 && selectedChat.name === chatOptions[0].name && (
 								<div className="grow">
 									<p className="text-xs lg:text-sm font-semibold mb-1 text-blue-600">Select User</p>
 									<ComboBox
@@ -105,7 +105,7 @@ const AddChat: React.FC<Props> = ({ visible, setVisible }) => {
 								</div>
 							)}
 						</div>
-						{projectUsers.length > 0 && selectedChat.name === chatOptions[1].name && (
+						{projectUsers?.length > 0 && selectedChat.name === chatOptions[1].name && (
 							<div className="grow mt-4">
 								<p className="text-xs lg:text-sm font-semibold mb-1 text-blue-600">Add Users</p>
 								<GroupComboBox

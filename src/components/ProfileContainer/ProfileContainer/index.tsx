@@ -61,8 +61,8 @@ const ProfileContainer: React.FC<Props> = ({ className = "" }) => {
 									/>
 								) : (
 									<ProfileMembers
-										name={bio?.name ?? "sdnajkdasn"}
-										NoOfParticipates={bio?.membersList.length ?? 0}
+										name={bio?.name ?? "loading..."}
+										NoOfParticipates={bio?.membersList?.length ?? 0}
 									/>
 								)}
 								<ProfileDescription description={bio?.bio ?? bio?.description} />

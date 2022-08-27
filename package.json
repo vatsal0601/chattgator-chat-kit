@@ -4,7 +4,7 @@
 		"type": "git",
 		"url": "https://github.com/vatsal0601/chattgator-chat-kit.git"
 	},
-	"version": "0.0.13",
+	"version": "0.0.14",
 	"description": "A chat ui component library with integrated backend by team ChattGator",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -16,7 +16,12 @@
 		"build:esm": "tsc",
 		"build:cjs": "tsc --module CommonJS --outDir dist/cjs"
 	},
-	"keywords": [],
+	"keywords": [
+		"chat",
+		"chattgator",
+		"chat ui kit",
+		"react"
+	],
 	"author": "Vatsal Sakariya",
 	"license": "MIT",
 	"devDependencies": {
