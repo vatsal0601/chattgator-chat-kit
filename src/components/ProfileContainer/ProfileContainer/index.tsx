@@ -22,7 +22,7 @@ const ProfileContainer: React.FC<Props> = ({ className = "" }) => {
 			const groupResponseService = new RecentChatService();
 			if (!profileDetails) return;
 			if (profileDetails.isGroup) data = await groupResponseService.getGroupById(profileDetails.id);
-			else data = await useResponseService.getUserById(info?._id);
+			else data = await useResponseService.getUserById(profileDetails.id);
 
 			setBio(data);
 			setIsFetching(false);
