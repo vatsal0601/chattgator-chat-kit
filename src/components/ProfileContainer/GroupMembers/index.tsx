@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Loading } from "../../Misc";
 import { ProfileService } from "../../../utils";
+import { useChattGator } from "../../../contexts";
 
 interface UserBioResponse {
 	projectId: string;
@@ -26,6 +27,7 @@ interface Props {
 const GroupMembers: React.FC<Props> = ({ adminList, memberList }) => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [data, setData] = useState<UserBioResponse[] | null>(null);
+	const { setProfileDetails } = useChattGator();
 
 	useEffect(() => {
 		const getData = async () => {
@@ -57,6 +59,7 @@ const GroupMembers: React.FC<Props> = ({ adminList, memberList }) => {
 							data.map((member, index) => (
 								<div
 									key={index}
+									onClick={() => setProfileDetails({ id: member?._id, isGroup: false })}
 									className="p-2 mb-2 rounded-lg flex hover:bg-blue-100 cursor-pointer"
 								>
 									<img
